@@ -176,6 +176,7 @@ func (r *reader) readHeader() ([]*Element, error) {
 			return nil, ErrorMetaElementGroupLength
 		}
 		metaElementGroupLengthDefined = false
+	} else {
 		metaLen = maybeMetaLen.Value.GetValue().([]int)[0]
 	}
 
@@ -757,7 +758,6 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 		return nil, err
 	}
 	debug.Logf("readElement: vr: %s", vr)
-
 	vl, err := r.readVL(readImplicit, *t, vr)
 	if err != nil {
 		return nil, err
